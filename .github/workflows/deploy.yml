@@ -2,7 +2,7 @@
 name: GitHub Actions Build Docs
 
 # 从工作流生成的工作流运行的名称，如果省略，则使用提交时的commit信息
-# run-name: Deploy by @${{ github.actor }}
+# run-name: Deploy by @${{ github.actor }} to "${{ github.commit }}"
 
 # 触发部署的条件
 on:
@@ -21,7 +21,7 @@ jobs:
     steps:
       # clone 该仓库的源码到工作流中
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
 
@@ -34,8 +34,9 @@ jobs:
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         # 此actions的官方文档 https://github.com/JamesIves/github-pages-deploy-action
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          REPOSITORY_NAME: seyao/github-actions-demo
           FOLDER: dist
           BRANCH: gh-pages
