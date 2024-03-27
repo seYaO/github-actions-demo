@@ -29,7 +29,7 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run-script build
+          npm run-script generate
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
@@ -37,5 +37,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          FOLDER: build
+          FOLDER: dist
           BRANCH: gh-pages
