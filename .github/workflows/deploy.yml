@@ -1,0 +1,41 @@
+# 工作流的名称，如果省略，则使用当前文件名
+name: GitHub Actions Build VitePress Docs
+
+# 从工作流生成的工作流运行的名称，如果省略，则使用提交时的commit信息
+# run-name: Deploy by @${{ github.actor }}
+
+# 触发部署的条件
+on:
+  # 每当 push 到 main 分支时触发部署
+  push:
+    branches:
+      - main
+
+# 当前流程要执行的任务，可以是多个。[my_first_job]就是一个任务
+jobs:
+  build-and-deploy:
+    # 运行所需要的虚拟机环境
+    runs-on: ubuntu-latest
+
+    # 每个任务下的运行步骤，短横杠 - 表示一个步骤，从上至下依次执行。
+    steps:
+      # clone 该仓库的源码到工作流中
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      # 运行构建脚本
+      - name: Install and Build
+        run: |
+          npm install
+          npm run-script docs:build
+
+      # 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        # 此actions的官方文档 https://github.com/JamesIves/github-pages-deploy-action
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          FOLDER: docs/dist
+          BRANCH: gh-pages
