@@ -21,7 +21,7 @@ jobs:
     steps:
       # clone 该仓库的源码到工作流中
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           persist-credentials: false
 
@@ -34,7 +34,7 @@ jobs:
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         # 此actions的官方文档 https://github.com/JamesIves/github-pages-deploy-action
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           REPOSITORY_NAME: seyao/github-actions-demo
