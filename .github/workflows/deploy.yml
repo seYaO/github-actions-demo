@@ -2,7 +2,7 @@
 name: GitHub Actions Build Docs
 
 # 从工作流生成的工作流运行的名称，如果省略，则使用提交时的commit信息
-run-name: Deploy by @${{ github.actor }}
+# run-name: Deploy by @${{ github.actor }}
 
 # 触发部署的条件
 on:
