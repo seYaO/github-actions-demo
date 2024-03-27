@@ -37,5 +37,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          REPOSITORY_NAME: seyao/github-actions-demo
           FOLDER: docs/dist
           BRANCH: gh-pages
